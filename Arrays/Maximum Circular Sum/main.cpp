@@ -3,55 +3,62 @@
 using namespace std;
 int maximumCircularSum(int *a,int n)
 {
-    int left=0;
-    int right=0;
-    int cur_max=0;
-    int sum_max=0;
-    for(int i=0;i<n;i++)
+    int i=0;
+    int j=0;
+    int cur=0;
+    int max=0;
+    while(j<n)
     {
-        cur_max+=a[i];
-        if(cur_max<0)
+        cur+=a[j];
+        if(cur<0)
         {
-            cur_max=0;
-            left=i+1;
+            i=j+1;
+            j++;
+            cur=0;
         }
-        if(cur_max>sum_max)
-        {
-            right =i;
+        else{
+            j++;
+            if(max<cur)
+            {
+                max=cur;
+            }
         }
-        sum_max=max(cur_max,sum_max);
     }
-    cur_max=0;
-    left=right;
-    for(int i=right;i<n;i++)
+    j=0;
+    while(j<i)
     {
-        cur_max+=a[i];
-        if(cur_max<0)
+        cur+=a[j];
+        if(cur<0)
         {
-            cur_max=0;
-            left=i+1;
+            break;
         }
-
-        sum_max=max(cur_max,sum_max);
-    }
-    for(int i=0;i<left;i++)
-    {
-        cur_max+=a[i];
-        if(cur_max<0)
-        {
-            cur_max=0;
+        else{
+            j++;
+            if(max<cur)
+            {
+                max=cur;
+            }
         }
-        sum_max=max(cur_max,sum_max);
     }
-
-
-    return sum_max;
+    return max;
 }
 int main()
 {
 
-     int a[] = {11, 10, -20, 5, -3, -5, 8, -13, 10};
-    int n = sizeof(a)/sizeof(a[0]);
-    cout << "Maximum circular sum is " << maximumCircularSum(a, n) << endl;
+    int n;
+    cin>>n;
+    int size1;
+
+    while(n>0)
+    {
+        cin>>size1;
+        int a[size1];
+        for(int i=0;i<size1;i++)
+        {
+            cin>>a[i];
+        }
+        cout<<maximumCircularSum(a,size1)<<endl;
+        n--;
+    }
     return 0;
 }
