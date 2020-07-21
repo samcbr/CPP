@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include<bits/stdc++.h>
 using namespace std;
 int * selectionSort(int *,int);
 int main()
@@ -15,28 +15,17 @@ int main()
     return 0;
 }
 int* selectionSort(int a[],int n)
-{   int mini;
-    int flag;
-    int j;
-    int temp;
+{   int min;
     for(int i=0;i<n;i++)
     {
-        flag=i;
-        mini=INT_MAX;
-        for(j=i+1;j<n;j++)
+        min=i;
+        for(int j=i+1;j<n;j++)
         {
-            if(mini>a[j])
-            {
-                mini=a[j];
-                flag=j;
-            }
+            if(a[j]<a[min])
+                min=j;
+
         }
-        if(a[i]>a[flag])
-        {
-            temp=a[flag];
-            a[flag]=a[i];
-            a[i]=temp;
-        }
+        swap(a[i],a[min]);
     }
     return a;
 }

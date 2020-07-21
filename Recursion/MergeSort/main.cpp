@@ -1,103 +1,72 @@
 #include <bits/stdc++.h>
 #include<algorithm>
-
 using namespace std;
-
-string ltrim(const string &);
-string rtrim(const string &);
-
-
-/*
- * Complete the 'longestSubarray' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts INTEGER_ARRAY arr as parameter.
- */
-
-int longestSubarray(vector<int> arr) {
-
-    if(arr.size()==1)
+void mergeSort(int *a,int n,int *b,int m)   //This function takes two sorted arrays as input always
+{
+    int aux[n+m];
+    int i=0;
+    int j=0;
+    int k=0;
+    while(i<n&&j<m)
     {
-        return 1;
-    }
-    auto left=arr.begin();
-    auto right=arr.begin()+1;
-    int cur=1;
-    int max=0;
-    int second;
-    int flag=0;
-    while(right!=arr.end())
-    {
-        //cout<<*left<<endl;
-        //cout<<*right<<endl;
-        //cout<<cur<<endl;
-
-        if(abs((*left)-(*right))<2)
+        if(a[i]>b[j])
         {
-            right++;
-            cur++;
-            if(max<cur)
-            {
-                max=cur;
-            }
+            aux[k]=b[j];
+            j++;
         }
-        else{
-            cur=1;
-            left=right;
-            right++;
+        else
+        {
+            aux[k]=a[i];
+            i++;
         }
-
+        k++;
     }
-    return max;
-
+    while(i<n)
+    {
+        aux[k]=a[i];
+        i++;
+        k++;
+    }
+    while(j<m)
+    {
+        aux[k]=b[j];
+        j++;
+        k++;
+    }
+    k=0;
+    for(i=0;i<n;i++)
+    {
+        a[i]=aux[k];
+        k++;
+    }
+    for(i=0;i<m;i++)
+    {
+        b[i]=aux[k];
+        k++;
+    }
+}
+void merge(int *a,int n)
+{
+    int mid;
+    if(n==1)        //Base case when size of array = 1 then it is already sorted
+    {
+        return;
+    }
+    else
+    {
+        mid=n/2;
+        merge(a,mid);
+        merge(a+mid,n-mid);
+        mergeSort(a,mid,a+mid,n-mid);
+    }
 }
 int main()
 {
-    ofstream fout(getenv("OUTPUT_PATH"));
-
-    string arr_count_temp;
-    getline(cin, arr_count_temp);
-
-    int arr_count = stoi(ltrim(rtrim(arr_count_temp)));
-
-    vector<int> arr(arr_count);
-
-    for (int i = 0; i < arr_count; i++) {
-        string arr_item_temp;
-        getline(cin, arr_item_temp);
-
-        int arr_item = stoi(ltrim(rtrim(arr_item_temp)));
-
-        arr[i] = arr_item;
+    int a[]={6,5,4,3,2,1};
+    merge(a,6);
+    for(int i=0;i<6;i++)
+    {
+        cout<<a[i]<<endl;
     }
-
-    int result = longestSubarray(arr);
-
-    fout << result << "\n";
-
-    fout.close();
-
     return 0;
-}
-
-string ltrim(const string &str) {
-    string s(str);
-
-    s.erase(
-        s.begin(),
-        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
-    );
-
-    return s;
-}
-
-string rtrim(const string &str) {
-    string s(str);
-
-    s.erase(
-        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
-        s.end()
-    );
-
-    return s;
 }

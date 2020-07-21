@@ -42,9 +42,19 @@ void spiralPattern(int a[][100],int m,int n)
 }
 int main()
 {
-    cout << "Hello world!" << endl;
-    int a[5][100]={{1,2,3,4,5,6},{7,8,9,10,11,12},{13,14,15,16,17,18},{19,20,21,22,23,24},{25,26,27,28,29,30}};
-    spiralPattern(a,5,6);
+    int m;
+    int n;
+    cin>>m;
+    cin>>n;
+    int a[m][n];
+    for(int i=0;i<m;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            cin>>a[i][j];
+        }
+    }
+    spiralPattern(a,m,n);
 
 
     return 0;
