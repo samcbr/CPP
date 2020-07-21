@@ -111,7 +111,6 @@ class StackList
 };
 int main()
 {
-    cout << "Hello world!" << endl;
     StackList stackList;
     stackList.peek();
     stackList.pop();
