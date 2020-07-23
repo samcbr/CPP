@@ -2,6 +2,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 vector<int> res;
+/*
+Approach
+The approach is identical to nearest greater element to right with two changes
+1 the array is traversed from the beginning
+2 the result vector is not reversed as it is already in the right order
+*/
+
 vector<int> nearestGreaterElementToLeft(int a[],int n)
 {
     stack<int> s;
