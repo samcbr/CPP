@@ -1,38 +1,45 @@
 #include <iostream>
 #include<bits/stdc++.h>
 using namespace std;
-void kmp(char *str,char *pat)
+void kmp1(char str[],char pat[])
 {
     int n=strlen(str);
     int m=strlen(pat);
-    int lps[m];
-    int j=1;
+
     int i=0;
+    int j=1;
+
+    //First we will pre process the pattern and create lps array for the same
+    int lps[m];//lps array will have same size as pattern length
     lps[i]=0;
     while(j<m)
     {
         if(pat[i]==pat[j])
         {
-            lps[j]=i+1;
             i++;
+            lps[j]=i;
             j++;
         }
         else
         {
             if(i!=0)
             {
-                i=0;
+                i=lps[i-1];     // Dry run this pattern to understand the reason for this step "ABAAABAAB"
+                                //lps array for above pattern should be {0,0,1,1,1,2,3,4,2}
             }
-
-            else
+            else//i=0
             {
-                lps[j]=0;
+                lps[j]=i;
                 j++;
             }
         }
     }
-    i=0;
-    j=0;
+
+    //Now we will find the pattern in string and print index of the pattern in string
+    j=0;    //used for traversing the string
+    i=0;    //used for traversing the string
+
+    //In this while loop we never backtrack i instead we only backtrack j when there is a mismatch
     while(i<n)
     {
         if(j<m)
@@ -44,22 +51,21 @@ void kmp(char *str,char *pat)
             }
             else
             {
-                if(j>0)
-                    {
-                        j=lps[j-1];
-                    }
+                if(j!=0)
+                {
+                    j=lps[j-1];
+                }
                 else
-                    {
-                        i++;
-                    }
+                {
+                    i++;
+                }
             }
         }
         else
         {
             cout<<i-j<<endl;
-            j=lps[j-1];     //vvi This is done to handle the case of overlapping pattern
+            j=lps[j-1];     //This is specifically done to handle overlapping pattern in string
         }
-
     }
     if(j==m)
     {
@@ -69,6 +75,6 @@ void kmp(char *str,char *pat)
 }
 int main()
 {
-    kmp("aaaaaaaaa","aaa");
+    kmp1("aaaabaaaa","aaa");
     return 0;
 }
