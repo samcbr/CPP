@@ -1,4 +1,3 @@
-#include <iostream>
 #include<bits/stdc++.h>
 using namespace std;
 void kmp1(char str[],char pat[])
@@ -27,7 +26,7 @@ void kmp1(char str[],char pat[])
                 i=lps[i-1];     // Dry run this pattern to understand the reason for this step "ABAAABAAB"
                                 //lps array for above pattern should be {0,0,1,1,1,2,3,4,2}
             }
-            else//i=0
+            else //i=0
             {
                 lps[j]=i;
                 j++;
