@@ -49,7 +49,7 @@ bool isOneBitCharacter(vector<int>& bits)
     if(i==bits.size()-1)
         return true;
 
-        return false;
+    return false;
 }
 int main()
 {
