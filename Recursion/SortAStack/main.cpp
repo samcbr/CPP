@@ -29,11 +29,6 @@ void sortAStack(stack<int> &s)
         insert(s,val);
     }
 }
-
-//sdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-
-
-
 int main()
 {
     stack<int> ss;
@@ -48,9 +43,6 @@ int main()
         cout<<ss.top()<<" ";
         ss.pop();
     }
-
-
-
 
     return 0;
 }
