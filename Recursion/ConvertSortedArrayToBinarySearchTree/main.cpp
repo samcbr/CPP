@@ -21,6 +21,22 @@ One possible answer is: [0,-3,9,-10,null,5], which represents the following heig
  Leetcode problem number: 108
  https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
 */
+/*
+Approach - Recursion(IBH)
+
+1. Hypothesis
+   void function(vector,left,right,TreeNode* t)
+2. Induction
+    Find the mid point of the given vector and set it as the value of the tree node.
+    Also, create two new tree nodes for left and right child of given tree.Set the new tree nodes as left and right child of the given tree
+    Call function recursively for left and mid-1 with tree node left and for mid+1 and right with tree node right
+3. Base Case
+    if left == right
+        set value of tree node and return
+    if left>right
+        set t as NULL and return
+
+*/
 struct TreeNode
 {
     int val;
